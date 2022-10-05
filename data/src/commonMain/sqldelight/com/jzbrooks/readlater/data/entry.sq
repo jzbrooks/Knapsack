@@ -1,0 +1,17 @@
+CREATE TABLE entry (
+  id INTEGER NOT NULL PRIMARY KEY,
+  title TEXT NOT NULL,
+  url TEXT NOT NULL,
+  content TEXT NOT NULL,
+  preview_picture TEXT
+);
+
+insertEntry:
+INSERT OR REPLACE INTO entry (id, title, url, content, preview_picture)
+VALUES (?, ?, ?, ?, ?);
+
+selectAll:
+SELECT * FROM entry ORDER BY id DESC;
+
+deleteAll:
+DELETE FROM entry;

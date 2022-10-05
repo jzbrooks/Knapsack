@@ -1,0 +1,13 @@
+package com.jzbrooks.readlater.data.net.entries
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class EntryDto(
+    val id: Long,
+    val title: String,
+    val url: String,
+    val content: String,
+    @SerialName("preview_picture") val previewPicture: String? = null
+)
