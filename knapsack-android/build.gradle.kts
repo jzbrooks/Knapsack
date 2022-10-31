@@ -20,10 +20,26 @@ android {
         }
 
         // A developer shortcut for signing in.
-        buildConfigField("String", "CONST_CLIENT_ID", '\"' + (properties["CONST_CLIENT_ID"]?.toString() ?: "") + '\"')
-        buildConfigField("String", "CONST_CLIENT_SECRET", '\"' + (properties["CONST_CLIENT_SECRET"]?.toString() ?: "") + '\"')
-        buildConfigField("String", "CONST_USERNAME", '\"' + (properties["CONST_USERNAME"]?.toString() ?: "") + '\"')
-        buildConfigField("String", "CONST_PASSWORD", '\"' + (properties["CONST_PASSWORD"]?.toString() ?: "") + '\"')
+        buildConfigField(
+            "String",
+            "CONST_CLIENT_ID",
+            '\"' + (properties["CONST_CLIENT_ID"]?.toString() ?: "") + '\"',
+        )
+        buildConfigField(
+            "String",
+            "CONST_CLIENT_SECRET",
+            '\"' + (properties["CONST_CLIENT_SECRET"]?.toString() ?: "") + '\"',
+        )
+        buildConfigField(
+            "String",
+            "CONST_USERNAME",
+            '\"' + (properties["CONST_USERNAME"]?.toString() ?: "") + '\"',
+        )
+        buildConfigField(
+            "String",
+            "CONST_PASSWORD",
+            '\"' + (properties["CONST_PASSWORD"]?.toString() ?: "") + '\"',
+        )
     }
 
     buildTypes {
@@ -31,7 +47,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
