@@ -60,11 +60,11 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(Routes.HOME) {
                                 ReadingListScreen(repository) { entry ->
-                                    navController.navigate(Routes.READING.removeSuffix("{url}") + URLEncoder.encode(entry.content, StandardCharsets.UTF_8.name()))
+                                    navController.navigate(Routes.READING.removeSuffix("{content}") + URLEncoder.encode(entry.content, StandardCharsets.UTF_8.name()))
                                 }
                             }
                             composable(Routes.READING) { backStackEntry ->
-                                ReadingScreen(url = URLDecoder.decode(backStackEntry.arguments?.getString("url")!!, StandardCharsets.UTF_8.name()))
+                                ReadingScreen(content = URLDecoder.decode(backStackEntry.arguments?.getString("content")!!, StandardCharsets.UTF_8.name()))
                             }
                         }
                     }
@@ -77,5 +77,5 @@ class MainActivity : ComponentActivity() {
 object Routes {
     const val HOME = "home"
     const val AUTH = "auth"
-    const val READING = "reading/{url}"
+    const val READING = "reading/{content}"
 }
