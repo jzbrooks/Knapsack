@@ -19,13 +19,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.jzbrooks.readlater.data.Entry
 import com.jzbrooks.readlater.data.EntryRepository
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
 
 @Composable
 fun ReadingListScreen(
     repository: EntryRepository,
-    onEntryClicked: (com.jzbrooks.readlater.data.Entry) -> Unit,
+    onEntryClicked: (Entry) -> Unit,
 ) {
     val entries = repository.entries.collectAsState(initial = emptyList())
 
@@ -34,7 +35,7 @@ fun ReadingListScreen(
     }
 
     LazyColumn {
-        items(entries.value, key = com.jzbrooks.readlater.data.Entry::id) {
+        items(entries.value, key = Entry::id) {
             ReadingEntry(it, Modifier.padding(8.dp).clickable { onEntryClicked(it) })
             Divider()
         }
@@ -42,7 +43,7 @@ fun ReadingListScreen(
 }
 
 @Composable
-fun ReadingEntry(entry: com.jzbrooks.readlater.data.Entry, modifier: Modifier = Modifier) {
+fun ReadingEntry(entry: Entry, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.fillMaxWidth().fillMaxHeight(2/16f),
         verticalAlignment = Alignment.CenterVertically
@@ -62,9 +63,9 @@ fun ReadingEntry(entry: com.jzbrooks.readlater.data.Entry, modifier: Modifier = 
                 )
             }
         }
-        
+
         Spacer(Modifier.size(8.dp))
-        
+
         Text(entry.title, style = MaterialTheme.typography.h3)
     }
 }
@@ -74,7 +75,7 @@ fun ReadingEntry(entry: com.jzbrooks.readlater.data.Entry, modifier: Modifier = 
 fun DefaultPreview() {
     ReadlaterTheme {
         ReadingEntry(
-            com.jzbrooks.readlater.data.Entry(
+            Entry(
                 1,
                 "You should read this",
                 "https://americanreformer.org/wp-content/uploads/2022/10/mai-rodriguez-__4mdndKK1w-unsplash-1-scaled-e1664893436482-1536x476.jpeg",
