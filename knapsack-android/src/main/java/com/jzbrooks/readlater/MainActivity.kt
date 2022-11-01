@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -35,18 +38,15 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ReadlaterTheme {
-                Scaffold(topBar = {
-                    TopAppBar(
-                        title = { Text(stringResource(R.string.app_name)) },
-                        backgroundColor = MaterialTheme.colors.primaryVariant,
-                        elevation = 0.dp
-                    )
-                }) {
+                val navController = rememberNavController()
+
+                Scaffold(topBar = { KnapsackAppBar(navController) }) {
                     Surface(
-                        modifier = Modifier.fillMaxSize().padding(it),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(it),
                         color = MaterialTheme.colors.background
                     ) {
-                        val navController = rememberNavController()
                         val startDestination =
                             if (authenticator.isAuthenticated) Routes.HOME else Routes.AUTH
                         NavHost(
