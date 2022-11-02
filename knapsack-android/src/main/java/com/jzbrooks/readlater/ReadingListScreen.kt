@@ -30,10 +30,6 @@ fun ReadingListScreen(
 ) {
     val entries = repository.entries.collectAsState(initial = emptyList())
 
-    LaunchedEffect(entries.value) {
-        repository.updateEntries()
-    }
-
     LazyColumn {
         items(entries.value, key = Entry::id) {
             ReadingEntry(it, Modifier.padding(8.dp).clickable { onEntryClicked(it) })

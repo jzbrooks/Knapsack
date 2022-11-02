@@ -39,10 +39,7 @@ class FormattingVisitor : NodeVisitor {
                 "h4",
                 "h5",
             )
-        )
-            append("\n")
-        else if (name == "a")
-            append(" <${node.absUrl("href")}>")
+        ) append("\n")
     }
 
     private fun append(text: String) {
