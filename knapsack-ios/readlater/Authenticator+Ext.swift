@@ -7,7 +7,7 @@
 
 import data
 
-extension AppSettingsManager : ObservableObject {
+extension SettingsManager : ObservableObject {
     
 }
 

@@ -89,7 +89,7 @@ struct ReadingList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ReadingListView(
-                authManager: Authenticator(appSettings: AppSettingsManager()),
+                authManager: Authenticator(appSettings: SettingsManager()),
                 entries: [.preview]
             )            
         }

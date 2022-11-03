@@ -10,13 +10,13 @@ import data
 
 @main
 struct ReadlaterApp: App {
-    @StateObject var appSettingsManager: AppSettingsManager
+    @StateObject var appSettingsManager: SettingsManager
     @StateObject var authenticationManager: Authenticator
     @StateObject var dataController: CachingEntryRepository
     
     init() {
         let driverFactory = DriverFactory()
-        let appSettings = AppSettingsManager()
+        let appSettings = SettingsManager()
         let authenticator = Authenticator(appSettings: appSettings)
         let service = EntryService(appSettings: appSettings, authenticationManager: authenticator)
         let dataController = CachingEntryRepository(authenticationManager: authenticator, databaseDriver: driverFactory, service: service)
