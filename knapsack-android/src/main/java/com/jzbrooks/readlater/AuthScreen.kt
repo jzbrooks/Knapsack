@@ -1,6 +1,5 @@
 package com.jzbrooks.readlater
 
-import android.webkit.URLUtil
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -16,6 +15,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jzbrooks.readlater.data.AppSettingsManager
+import com.jzbrooks.readlater.data.SettingsManager
 import com.jzbrooks.readlater.data.net.auth.AuthenticationManager
 import com.jzbrooks.readlater.data.net.auth.PasswordGrantRequestDto
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
@@ -42,44 +42,13 @@ fun AuthScreen(
 
     ModalBottomSheetLayout(
         sheetContent = {
-            val baseUrl = rememberSaveable { mutableStateOf(appSettings.baseUrl) }
-
-            Box(
-                Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column {
-                    TextField(
-                        baseUrl.value,
-                        {
-                            baseUrl.value = it
-                            if (URLUtil.isValidUrl(it)) {
-                                appSettings.baseUrl = it
-                            }
-                        },
-                        label = { Text("Base Url") },
-                        singleLine = true,
-                    )
-
-                    Spacer(Modifier.size(8.dp))
-
-                    TextField(
-                        clientId.value,
-                        { clientId.value = it },
-                        label = { Text("Client ID") },
-                        singleLine = true,
-                    )
-
-                    Spacer(Modifier.size(8.dp))
-
-                    TextField(
-                        clientSecret.value,
-                        { clientSecret.value = it },
-                        label = { Text("Client Secret") },
-                        singleLine = true,
-                    )
-                }
-            }
+            HostConfiguration(
+                appSettings,
+                clientId.value,
+                { clientId.value = it },
+                clientSecret.value,
+                { clientSecret.value = it },
+            )
         },
         sheetState = bottomSheet,
     ) {
@@ -140,7 +109,11 @@ fun AuthScreen(
 fun AuthScreenPreview() {
     ReadlaterTheme {
         AuthScreen(
-            appSettings = AppSettingsManager(),
+            appSettings = object : AppSettingsManager {
+                override var baseUrl: String
+                    get() = "https://app.wallabag.it"
+                    set(_) {}
+            },
             authenticationManager = object : AuthenticationManager {
                 override val isAuthenticated: Boolean = false
                 override suspend fun retrieveAccessToken(): String = ""
