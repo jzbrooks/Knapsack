@@ -2,7 +2,7 @@ import SwiftUI
 import data
 
 struct AuthenticationView: View {
-    @EnvironmentObject var appSettingsManager: AppSettingsManager
+    @EnvironmentObject var appSettingsManager: SettingsManager
     @EnvironmentObject var authenticationManager: Authenticator
     
     @State var baseUrl: String = "https://app.wallabag.it"
