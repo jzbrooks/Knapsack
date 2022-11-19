@@ -69,22 +69,7 @@ class MainActivity : ComponentActivity() {
                             composable(
                                 Routes.READING,
                                 arguments = listOf(navArgument("id") { type = NavType.LongType })
-                            ) { backStackEntry ->
-                                val id = backStackEntry.arguments?.getLong("id")!!
-                                val formattedContent = rememberSaveable { mutableStateOf("") }
-
-                                LaunchedEffect(id) {
-                                    val entry = repository.getEntry(id)
-
-                                    if (entry?.content != null) {
-                                        val basicFormatter = FormattingVisitor()
-                                        NodeTraversor.traverse(basicFormatter, Jsoup.parse(entry.content).root())
-                                        formattedContent.value = basicFormatter.toString()
-                                    }
-                                }
-
-                                ReadingScreen(formattedContent.value)
-                            }
+                            ) { backStackEntry -> ReadingScreen(backStackEntry, repository) }
                         }
                     }
                 }
