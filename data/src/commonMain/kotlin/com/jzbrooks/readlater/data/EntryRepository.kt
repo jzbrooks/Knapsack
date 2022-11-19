@@ -7,4 +7,5 @@ interface EntryRepository {
     val entries: Flow<List<Entry>>
     suspend fun updateEntries()
     suspend fun deleteAllEntries()
+    suspend fun getEntry(id: Long): Entry?
 }

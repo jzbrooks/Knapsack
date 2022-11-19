@@ -45,6 +45,10 @@ class CachingEntryRepository(
         }
     }
 
+    override suspend fun getEntry(id: Long): Entry? {
+        return database.entryQueries.getEntry(id).executeAsOneOrNull()
+    }
+
     override suspend fun deleteAllEntries() {
         database.entryQueries.deleteAll()
     }

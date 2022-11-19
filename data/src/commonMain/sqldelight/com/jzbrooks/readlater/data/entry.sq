@@ -1,5 +1,5 @@
 CREATE TABLE entry (
-  id INTEGER NOT NULL PRIMARY KEY,
+  id INTEGER AS Long NOT NULL PRIMARY KEY,
   title TEXT NOT NULL,
   url TEXT NOT NULL,
   content TEXT NOT NULL,
@@ -9,6 +9,9 @@ CREATE TABLE entry (
 insertEntry:
 INSERT OR REPLACE INTO entry (id, title, url, content, preview_picture)
 VALUES (?, ?, ?, ?, ?);
+
+getEntry:
+SELECT * FROM entry WHERE id = ?;
 
 selectAll:
 SELECT * FROM entry ORDER BY id DESC;
