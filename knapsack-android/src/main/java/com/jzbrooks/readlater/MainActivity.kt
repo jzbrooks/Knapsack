@@ -7,19 +7,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.jzbrooks.readlater.data.SettingsManager
 import com.jzbrooks.readlater.data.CachingEntryRepository
 import com.jzbrooks.readlater.data.db.DriverFactory
 import com.jzbrooks.readlater.data.net.auth.Authenticator
 import com.jzbrooks.readlater.data.net.entries.EntryService
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
-import java.net.URLDecoder
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
+import org.jsoup.Jsoup
+import org.jsoup.select.NodeTraversor
 
 
 class MainActivity : ComponentActivity() {
@@ -60,11 +63,27 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 ReadingListScreen(repository) { entry ->
-                                    navController.navigate(Routes.READING.removeSuffix("{content}") + URLEncoder.encode(entry.content, StandardCharsets.UTF_8.name()))
+                                    navController.navigate(Routes.READING.replace("{id}", entry.id.toString()))
                                 }
                             }
-                            composable(Routes.READING) { backStackEntry ->
-                                ReadingScreen(content = URLDecoder.decode(backStackEntry.arguments?.getString("content")!!, StandardCharsets.UTF_8.name()))
+                            composable(
+                                Routes.READING,
+                                arguments = listOf(navArgument("id") { type = NavType.LongType })
+                            ) { backStackEntry ->
+                                val id = backStackEntry.arguments?.getLong("id")!!
+                                val formattedContent = rememberSaveable { mutableStateOf("") }
+
+                                LaunchedEffect(id) {
+                                    val entry = repository.getEntry(id)
+
+                                    if (entry?.content != null) {
+                                        val basicFormatter = FormattingVisitor()
+                                        NodeTraversor.traverse(basicFormatter, Jsoup.parse(entry.content).root())
+                                        formattedContent.value = basicFormatter.toString()
+                                    }
+                                }
+
+                                ReadingScreen(formattedContent.value)
                             }
                         }
                     }
@@ -77,5 +96,5 @@ class MainActivity : ComponentActivity() {
 object Routes {
     const val HOME = "home"
     const val AUTH = "auth"
-    const val READING = "reading/{content}"
+    const val READING = "reading/{id}"
 }
