@@ -1,4 +1,4 @@
-package com.jzbrooks.readlater
+package com.jzbrooks.readlater.data.text
 
 import org.jsoup.nodes.Node
 import org.jsoup.nodes.TextNode

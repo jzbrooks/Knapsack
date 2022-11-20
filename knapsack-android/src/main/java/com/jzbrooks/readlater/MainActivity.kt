@@ -5,24 +5,21 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.jzbrooks.readlater.data.SettingsManager
 import com.jzbrooks.readlater.data.CachingEntryRepository
+import com.jzbrooks.readlater.data.SettingsManager
 import com.jzbrooks.readlater.data.db.DriverFactory
 import com.jzbrooks.readlater.data.net.auth.Authenticator
 import com.jzbrooks.readlater.data.net.entries.EntryService
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
-import org.jsoup.Jsoup
-import org.jsoup.select.NodeTraversor
 
 
 class MainActivity : ComponentActivity() {

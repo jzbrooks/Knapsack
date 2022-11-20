@@ -49,6 +49,7 @@ kotlin {
             dependencies {
                 implementation("com.squareup.sqldelight:android-driver:1.5.3")
                 implementation("io.ktor:ktor-client-android:2.1.2")
+                implementation("org.jsoup:jsoup:1.15.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
             }
         }
@@ -86,6 +87,10 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
+    }
+
+    lint {
+        informational += setOf("GradleDependency")
     }
 }
 
