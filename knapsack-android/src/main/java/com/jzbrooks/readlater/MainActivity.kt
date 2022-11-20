@@ -58,10 +58,6 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                             composable(Routes.HOME) {
-                                LaunchedEffect(null) {
-                                    repository.updateEntries()
-                                }
-
                                 ReadingListScreen(repository) { entry ->
                                     navController.navigate(Routes.READING.replace("{id}", entry.id.toString()))
                                 }
