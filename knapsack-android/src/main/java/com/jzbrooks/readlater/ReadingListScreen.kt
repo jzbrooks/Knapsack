@@ -28,18 +28,30 @@ fun ReadingListScreen(
     repository: EntryRepository,
     onEntryClicked: (Entry) -> Unit,
 ) {
+    LaunchedEffect(null) {
+        repository.updateEntries()
+    }
+
+    ReadingList(repository, onEntryClicked)
+}
+
+@Composable
+fun ReadingList(
+    repository: EntryRepository,
+    onEntryClicked: (Entry) -> Unit,
+) {
     val entries = repository.entries.collectAsState(initial = emptyList())
 
     LazyColumn {
         items(entries.value, key = Entry::id) {
-            ReadingEntry(it, Modifier.padding(8.dp).clickable { onEntryClicked(it) })
+            ReadingListEntry(it, Modifier.padding(8.dp).clickable { onEntryClicked(it) })
             Divider()
         }
     }
 }
 
 @Composable
-fun ReadingEntry(entry: Entry, modifier: Modifier = Modifier) {
+fun ReadingListEntry(entry: Entry, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.fillMaxWidth().fillMaxHeight(2/16f),
         verticalAlignment = Alignment.CenterVertically
@@ -68,9 +80,9 @@ fun ReadingEntry(entry: Entry, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun ReadingListEntryPreview() {
     ReadlaterTheme {
-        ReadingEntry(
+        ReadingListEntry(
             Entry(
                 1,
                 "You should read this",
