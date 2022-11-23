@@ -47,6 +47,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                implementation("androidx.core:core-ktx:1.9.0")
                 implementation("com.squareup.sqldelight:android-driver:1.5.3")
                 implementation("io.ktor:ktor-client-android:2.1.2")
                 implementation("org.jsoup:jsoup:1.15.3")

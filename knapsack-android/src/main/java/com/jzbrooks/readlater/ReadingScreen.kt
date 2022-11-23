@@ -1,5 +1,6 @@
 package com.jzbrooks.readlater
 
+import android.graphics.Typeface
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -11,6 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
@@ -30,7 +33,13 @@ fun ReadingScreen(backStackEntry: NavBackStackEntry, repository: EntryRepository
             // todo: Ideally the entry would have an HtmlString-typed property
             //  slightly tricky with SQLDelight generation
             val styledString = HtmlString(entry.content).toStyledString()
-            formattedContent.value = AnnotatedString(styledString.text)
+            val builder = AnnotatedString.Builder()
+            builder.append(styledString.text)
+            for (bold in styledString.boldPositions) {
+                builder.addStyle(SpanStyle(fontWeight = FontWeight.Bold), bold.first, bold.last)
+            }
+
+            formattedContent.value = builder.toAnnotatedString()
         }
     }
 
