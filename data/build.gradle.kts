@@ -22,6 +22,7 @@ kotlin {
             ios.deploymentTarget = "15"
         }
 
+        pod("HTMLReader")
         pod("GONMarkupParser")
         pod("GDataXML-HTML") {
             version = "~> 1.4.1"

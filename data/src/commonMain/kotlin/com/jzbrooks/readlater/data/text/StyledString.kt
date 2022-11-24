@@ -6,3 +6,7 @@ data class StyledString(
     val italicPositions: List<IntRange> = emptyList(),
     val underlinedPositions: List<IntRange> = emptyList(),
 )
+
+fun HtmlElement.toStyledString(): StyledString {
+    TODO("implement walking dom")
+}

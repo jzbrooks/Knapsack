@@ -11,6 +11,7 @@ Pod::Spec.new do |spec|
     spec.ios.deployment_target = '15'
     spec.dependency 'GDataXML-HTML', '~> 1.4.1'
     spec.dependency 'GONMarkupParser'
+    spec.dependency 'HTMLReader'
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':data',

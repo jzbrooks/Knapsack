@@ -6,6 +6,8 @@ import org.jsoup.select.NodeVisitor
 
 class FormattingVisitor : NodeVisitor {
     private val builder = StringBuilder()
+    val text: String
+        get() = builder.toString()
 
     override fun head(node: Node, depth: Int) {
         val name = node.nodeName()
@@ -49,7 +51,5 @@ class FormattingVisitor : NodeVisitor {
 
         builder.append(text)
     }
-
-    override fun toString() = builder.toString()
 }
 
