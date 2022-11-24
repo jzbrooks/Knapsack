@@ -5,10 +5,14 @@ internal class FormattingVisitor {
     val text: String
         get() = builder.toString()
 
+    var boldStart: Int? = null
+    val boldPositions = mutableListOf<IntRange>()
+
     fun head(element: HtmlElement) {
         val name = element.tagName
 
         if (element.text != null) append(element.text)
+        else if (name == "strong") boldStart = builder.length
         else if (name == "li") append("\n * ")
         else if (name == "dt") append("  ")
         else if (name in setOf(
@@ -37,6 +41,11 @@ internal class FormattingVisitor {
                 "h5",
             )
         ) append("\n")
+        else if (name == "strong") {
+            val range = boldStart!!..builder.length
+            boldStart = null
+            boldPositions.add(range)
+        }
     }
 
     private fun append(text: String) {

@@ -10,23 +10,17 @@ data class StyledString(
 internal fun HtmlElement.toStyledString(): StyledString {
     val visitor = FormattingVisitor()
     var node: HtmlElement? = this
-    var depth = 0
 
     while (node != null) {
-        val parent: HtmlElement? = node.parent
+        visitor.head(node)
 
-        visitor.head(node) // visit current node
-
-        if (!parent?.children.isNullOrEmpty()) { // descend
+        // Iterative DFS
+        if (node.children.isNotEmpty()) {
             node = node.children[0]
-            depth++
         } else {
-            while (true) {
-                checkNotNull(node)
-                if (!(node.nextSibling == null && depth > 0)) break
+            while (node != null && node.nextSibling == null) {
                 visitor.tail(node) // when no more siblings, ascend
                 node = node.parent
-                depth--
             }
 
             if (node != null) {
@@ -34,9 +28,10 @@ internal fun HtmlElement.toStyledString(): StyledString {
             }
 
             if (node === this) break
+
             node = node?.nextSibling
         }
     }
 
-    return StyledString(visitor.text)
+    return StyledString(visitor.text, visitor.boldPositions)
 }
