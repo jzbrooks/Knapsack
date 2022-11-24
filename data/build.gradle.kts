@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode.BITCODE
-
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.serialization")
@@ -23,10 +21,6 @@ kotlin {
         }
 
         pod("HTMLReader")
-        pod("GONMarkupParser")
-        pod("GDataXML-HTML") {
-            version = "~> 1.4.1"
-        }
     }
 
     sourceSets {
