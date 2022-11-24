@@ -1,0 +1,23 @@
+PODS:
+  - data (1.0):
+    - HTMLReader
+  - HTMLReader (2.2.1)
+
+DEPENDENCIES:
+  - data (from `../data`)
+
+SPEC REPOS:
+  trunk:
+    - HTMLReader
+
+EXTERNAL SOURCES:
+  data:
+    :path: "../data"
+
+SPEC CHECKSUMS:
+  data: fe6c09844a0e37abbe9aca1b6ac72a6286873a7e
+  HTMLReader: 1839a8505df3fb7a833e767759a799ce8e210de1
+
+PODFILE CHECKSUM: afa981d575cc0353575f8bbe5e621fe82ef3b3c6
+
+COCOAPODS: 1.11.3

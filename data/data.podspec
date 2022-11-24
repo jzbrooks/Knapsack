@@ -9,15 +9,13 @@ Pod::Spec.new do |spec|
     spec.vendored_frameworks      = 'build/cocoapods/framework/data.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '15'
-    spec.dependency 'GDataXML-HTML', '~> 1.4.1'
-    spec.dependency 'GONMarkupParser'
     spec.dependency 'HTMLReader'
-                
+
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':data',
         'PRODUCT_MODULE_NAME' => 'data',
     }
-                
+
     spec.script_phases = [
         {
             :name => 'Build data',
@@ -37,5 +35,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-                
+
 end

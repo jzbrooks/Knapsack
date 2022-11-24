@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E91F3928EDC0C994E7D9489 /* Pods_readlater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BFF5AE1C8E7D5E7BB1B900F /* Pods_readlater.framework */; };
 		D0414AD1281E226C00E0B373 /* HypertextMarkupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0414AD0281E226C00E0B373 /* HypertextMarkupView.swift */; };
 		D0561F9527D7054100E45992 /* ReadlaterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0561F9427D7054100E45992 /* ReadlaterApp.swift */; };
 		D0561F9927D7054200E45992 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0561F9827D7054200E45992 /* Assets.xcassets */; };
@@ -38,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F171ECE639B0AC697D3023F /* Pods-readlater.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-readlater.release.xcconfig"; path = "Target Support Files/Pods-readlater/Pods-readlater.release.xcconfig"; sourceTree = "<group>"; };
+		8195229CE534B8437A66E1DD /* Pods-readlater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-readlater.debug.xcconfig"; path = "Target Support Files/Pods-readlater/Pods-readlater.debug.xcconfig"; sourceTree = "<group>"; };
+		8BFF5AE1C8E7D5E7BB1B900F /* Pods_readlater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_readlater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0414AD0281E226C00E0B373 /* HypertextMarkupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypertextMarkupView.swift; sourceTree = "<group>"; };
 		D0561F9127D7054100E45992 /* readlater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = readlater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0561F9427D7054100E45992 /* ReadlaterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadlaterApp.swift; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E91F3928EDC0C994E7D9489 /* Pods_readlater.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A8F04B0BED34FA7020B89DB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BFF5AE1C8E7D5E7BB1B900F /* Pods_readlater.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D0561F8827D7054100E45992 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +99,8 @@
 				D0561FA427D7054200E45992 /* readlaterTests */,
 				D0561FAE27D7054200E45992 /* readlaterUITests */,
 				D0561F9227D7054100E45992 /* Products */,
+				E4E98B0D140BA8C117B1D679 /* Pods */,
+				2A8F04B0BED34FA7020B89DB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +154,15 @@
 			path = readlaterUITests;
 			sourceTree = "<group>";
 		};
+		E4E98B0D140BA8C117B1D679 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8195229CE534B8437A66E1DD /* Pods-readlater.debug.xcconfig */,
+				4F171ECE639B0AC697D3023F /* Pods-readlater.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,18 +170,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0561FB527D7054200E45992 /* Build configuration list for PBXNativeTarget "readlater" */;
 			buildPhases = (
-				D065154A29007153006A8FBA /* KMM Framework Compile */,
+				BC76C1D974B78D966D7C95BD /* [CP] Check Pods Manifest.lock */,
 				D0561F8D27D7054100E45992 /* Sources */,
 				D0561F8E27D7054100E45992 /* Frameworks */,
 				D0561F8F27D7054100E45992 /* Resources */,
+				EA771F597CAF292E4C502D3B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = readlater;
-			packageProductDependencies = (
-			);
 			productName = readlater;
 			productReference = D0561F9127D7054100E45992 /* readlater.app */;
 			productType = "com.apple.product-type.application";
@@ -230,8 +253,6 @@
 				Base,
 			);
 			mainGroup = D0561F8827D7054100E45992;
-			packageReferences = (
-			);
 			productRefGroup = D0561F9227D7054100E45992 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -270,24 +291,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D065154A29007153006A8FBA /* KMM Framework Compile */ = {
+		BC76C1D974B78D966D7C95BD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "KMM Framework Compile";
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-readlater-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :data:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA771F597CAF292E4C502D3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-readlater/Pods-readlater-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-readlater/Pods-readlater-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-readlater/Pods-readlater-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -456,6 +497,7 @@
 		};
 		D0561FB627D7054200E45992 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8195229CE534B8437A66E1DD /* Pods-readlater.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -465,7 +507,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"readlater/Preview Content\"";
 				DEVELOPMENT_TEAM = 867TTVN9S4;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../data/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -478,11 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					data,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jzbrooks.readlater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -494,6 +532,7 @@
 		};
 		D0561FB727D7054200E45992 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F171ECE639B0AC697D3023F /* Pods-readlater.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -502,7 +541,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"readlater/Preview Content\"";
 				DEVELOPMENT_TEAM = 867TTVN9S4;
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../data/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -515,11 +554,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					data,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jzbrooks.readlater;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
