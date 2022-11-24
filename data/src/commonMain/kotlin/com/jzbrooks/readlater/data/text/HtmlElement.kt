@@ -1,7 +1,7 @@
 package com.jzbrooks.readlater.data.text
 
 /** Represents a single element in a static document tree. */
-expect class HtmlElement {
+internal expect class HtmlElement {
     val tagName: String
     val text: String?
     val parent: HtmlElement?

@@ -1,19 +1,14 @@
 package com.jzbrooks.readlater.data.text
 
-import org.jsoup.nodes.Node
-import org.jsoup.nodes.TextNode
-import org.jsoup.select.NodeVisitor
-
-class FormattingVisitor : NodeVisitor {
-    private val builder = StringBuilder()
+internal class FormattingVisitor {
+    private val builder = StringBuilder(1024*1024)
     val text: String
         get() = builder.toString()
 
-    override fun head(node: Node, depth: Int) {
-        val name = node.nodeName()
+    fun head(element: HtmlElement) {
+        val name = element.tagName
 
-        // TextNodes carry all user-readable text in the DOM.
-        if (node is TextNode) append(node.text())
+        if (element.text != null) append(element.text)
         else if (name == "li") append("\n * ")
         else if (name == "dt") append("  ")
         else if (name in setOf(
@@ -28,8 +23,8 @@ class FormattingVisitor : NodeVisitor {
         ) append("\n")
     }
 
-    override fun tail(node: Node, depth: Int) {
-        val name = node.nodeName()
+    fun tail(element: HtmlElement) {
+        val name = element.tagName
         if (name in setOf(
                 "br",
                 "dd",
@@ -52,4 +47,3 @@ class FormattingVisitor : NodeVisitor {
         builder.append(text)
     }
 }
-
