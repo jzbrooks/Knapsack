@@ -11,8 +11,16 @@ import data
 struct ReadingListEntryView: View {
     @State var entry: Entry
     
+    var formattedText: AttributedString {
+        let string = HtmlString(text: entry.content)
+        let styled = string.toStyledString()
+        return AttributedString(stringLiteral: styled.text)
+    }
+
     var body: some View {
-        HypertextMarkupView(html: entry.content)
+        ScrollView {
+            Text(formattedText)
+        }
     }
 }
 
