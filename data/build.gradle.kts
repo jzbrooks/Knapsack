@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.serialization")
@@ -8,16 +9,24 @@ plugins {
 
 kotlin {
     android()
-    ios()
+
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        else -> ::iosX64
+    }
+
+    iosTarget("ios") {}
 
     cocoapods {
         version = "1.0"
-        summary = "Some description for a Kotlin/Native module"
-        homepage = "Link to a Kotlin/Native module homepage"
-
+        summary = "Wallabag data management library"
+        homepage = "https://github.com/jzbrooks/knapsack"
+        ios.deploymentTarget = "16"
+        osx.deploymentTarget = "13.0"
         framework {
+            isStatic = false
             baseName = "data"
-            ios.deploymentTarget = "15"
         }
 
         pod("HTMLReader")
@@ -56,6 +65,7 @@ kotlin {
         }
 
         val androidTest by getting
+
         val iosMain by getting {
             dependsOn(commonMain)
             dependencies {
@@ -63,6 +73,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-ios:2.1.2")
             }
         }
+
         val iosTest by getting {
             dependsOn(commonTest)
         }

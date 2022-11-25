@@ -1,6 +1,15 @@
-platform :ios, '16.0'
-use_frameworks!
-
 target 'readlater' do
+  use_frameworks!
+  platform :ios, '16'
   pod 'data', :path => '../data'
+
+  target 'readlaterTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'readlaterUITests' do
+    # Pods for testing
+  end
+
 end
