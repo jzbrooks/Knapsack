@@ -17,13 +17,14 @@ internal class FormattingVisitor {
     fun head(element: HtmlElement) {
         val name = element.tagName
 
-        if (element.text != null) append(element.text)
+        if (element.text != null) append(element.text!!)
         else if (name == "strong" || name == "b") boldStart = builder.length
         else if (name == "em" || name == "i") italicStart = builder.length
         else if (name == "u") underlineStart = builder.length
         else if (name == "li") append("\n * ")
         else if (name == "dt") append("  ")
-        else if (name in setOf(
+        else if (builder.isNotEmpty() && // Don't prepend an newline
+            name in setOf(
                 "p",
                 "h1",
                 "h2",
@@ -31,7 +32,7 @@ internal class FormattingVisitor {
                 "h4",
                 "h5",
                 "tr",
-            ) && !builder.endsWith('\n')
+            )
         ) append("\n")
     }
 
@@ -47,7 +48,7 @@ internal class FormattingVisitor {
                 "h3",
                 "h4",
                 "h5",
-            ) && !builder.endsWith('\n')
+            )
         ) append("\n")
         else if (name == "strong" || name == "b") {
             val range = boldStart!! until builder.length
