@@ -18,9 +18,9 @@ struct ReadingListEntryView: View {
     }
     
     var body: some View {
-        ScrollView {
-            formattedText
-        }
+        ScrollView(.vertical) {
+            formattedText.padding(.horizontal)
+        }.navigationTitle(entry.title)
     }
 }
 
