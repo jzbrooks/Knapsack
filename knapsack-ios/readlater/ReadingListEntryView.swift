@@ -10,16 +10,16 @@ import data
 
 struct ReadingListEntryView: View {
     @State var entry: Entry
-    
-    var formattedText: AttributedString {
+
+    private var formattedText: Text {
         let string = HtmlString(text: entry.content)
         let styled = string.toStyledString()
-        return AttributedString(stringLiteral: styled.text)
+        return styled.renderToView()
     }
-
+    
     var body: some View {
         ScrollView {
-            Text(formattedText)
+            formattedText
         }
     }
 }

@@ -1,15 +1,32 @@
 package com.jzbrooks.readlater.data.text
 
-import cocoapods.HTMLReader.HTMLElement
-import cocoapods.HTMLReader.HTMLNode
+import cocoapods.HTMLReader.*
 
 /** Represents a single element in a static document tree. */
-internal actual class HtmlElement(private val node: HTMLElement) {
-    actual val tagName: String = node.tagName
-    actual val text: String? = node.textContent
-    actual val parent: HtmlElement? get() = node.parentElement?.let(::HtmlElement)
-    actual val children: List<HtmlElement> get() = node.childElementNodes
-        .filterIsInstance<HTMLElement>().map(::HtmlElement)
+internal actual class HtmlElement(private val node: HTMLNode) {
+    actual val tagName: String = (node as? HTMLElement)?.tagName ?: ""
+    actual val text: String? = (node as? HTMLTextNode)?.data
 
-    actual val nextSibling: HtmlElement? = (node.parentElement?.childElementNodes()?.getOrNull(node.parentElement!!.indexOfChild(node).toInt() + 1) as HTMLElement?)?.let(::HtmlElement)
+    actual val parent: HtmlElement?
+        get() = node.parentElement?.let(::HtmlElement)
+    actual val children: List<HtmlElement>
+        get() {
+            val children = mutableListOf<HtmlElement>()
+            for (i in 0UL until node.children.count) {
+                children.add(HtmlElement(node.childAtIndex(i)))
+            }
+            return children
+        }
+
+    actual val nextSibling: HtmlElement?
+        get() {
+            val parent = node.parentElement ?: return null
+
+            val nextIndex = parent.indexOfChild(node) + 1UL
+            if (nextIndex >= parent.children.count) {
+                return null
+            }
+
+            return HtmlElement(parent.childAtIndex(nextIndex))
+        }
 }

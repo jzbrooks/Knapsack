@@ -20,6 +20,7 @@
 		D06B60D02800B88C009DE7C1 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B60CF2800B88C009DE7C1 /* ReadingListView.swift */; };
 		D06B60D6280517F2009DE7C1 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06B60D5280517F2009DE7C1 /* AuthenticationView.swift */; };
 		D0B9A841281B70CE000FDD53 /* ReadingListEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B9A840281B70CE000FDD53 /* ReadingListEntryView.swift */; };
+		D0D0FDA2293193A60028D5BF /* StyledString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D0FDA1293193A60028D5BF /* StyledString+Ext.swift */; };
 		F20BBC3EAAE6492ED9158B51 /* Pods_readlaterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C934EE0AB755A661A69599C /* Pods_readlaterTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		D06B60CF2800B88C009DE7C1 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
 		D06B60D5280517F2009DE7C1 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		D0B9A840281B70CE000FDD53 /* ReadingListEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListEntryView.swift; sourceTree = "<group>"; };
+		D0D0FDA1293193A60028D5BF /* StyledString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StyledString+Ext.swift"; sourceTree = "<group>"; };
 		E87B7E7C5CE2722585A6B33B /* Pods_readlater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_readlater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91532CC46CCADBA7736250F /* Pods-readlater-readlaterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-readlater-readlaterUITests.release.xcconfig"; path = "Target Support Files/Pods-readlater-readlaterUITests/Pods-readlater-readlaterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EAC66C7108B18472D346F25A /* Pods-readlater-readlaterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-readlater-readlaterUITests.debug.xcconfig"; path = "Target Support Files/Pods-readlater-readlaterUITests/Pods-readlater-readlaterUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				D0B9A840281B70CE000FDD53 /* ReadingListEntryView.swift */,
 				D0414AD0281E226C00E0B373 /* HypertextMarkupView.swift */,
 				D065154B29007325006A8FBA /* Authenticator+Ext.swift */,
+				D0D0FDA1293193A60028D5BF /* StyledString+Ext.swift */,
 			);
 			path = readlater;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				D065154C29007325006A8FBA /* Authenticator+Ext.swift in Sources */,
 				D0561F9527D7054100E45992 /* ReadlaterApp.swift in Sources */,
 				D0414AD1281E226C00E0B373 /* HypertextMarkupView.swift in Sources */,
+				D0D0FDA2293193A60028D5BF /* StyledString+Ext.swift in Sources */,
 				D06B60D6280517F2009DE7C1 /* AuthenticationView.swift in Sources */,
 				D06B60D02800B88C009DE7C1 /* ReadingListView.swift in Sources */,
 			);
