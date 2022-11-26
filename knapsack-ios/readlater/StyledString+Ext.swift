@@ -20,6 +20,10 @@ extension StyledString {
         let italics = self.italicPositions.map {
             self.text.index(self.text.startIndex, offsetBy: Int(truncating: $0.start))...self.text.index(self.text.startIndex, offsetBy: Int(truncating: $0.endInclusive))
         }
+        
+        let underlines = self.underlinedPositions.map {
+            self.text.index(self.text.startIndex, offsetBy: Int(truncating: $0.start))...self.text.index(self.text.startIndex, offsetBy: Int(truncating: $0.endInclusive))
+        }
                 
         var start = self.text.startIndex
         for i in self.text.indices {
@@ -33,6 +37,10 @@ extension StyledString {
                 newStyles.insert(.italic)
             }
             
+            if underlines.contains(where: { $0.contains(i) }) {
+                newStyles.insert(.underline)
+            }
+            
             if newStyles != pendingStyles {
                 let plain = self.text[start..<i]
                 
@@ -44,6 +52,10 @@ extension StyledString {
                 
                 if pendingStyles.contains(.italic) {
                     newSegment = newSegment.italic()
+                }
+                
+                if pendingStyles.contains(.underline) {
+                    newSegment = newSegment.underline()
                 }
                 
                 start = i
@@ -60,6 +72,6 @@ extension StyledString {
     }
 
     enum Style {
-        case bold, italic
+        case bold, italic, underline
     }
 }

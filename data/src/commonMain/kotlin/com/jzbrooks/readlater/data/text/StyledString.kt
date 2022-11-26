@@ -33,5 +33,10 @@ internal fun HtmlElement.toStyledString(): StyledString {
         }
     }
 
-    return StyledString(visitor.text, visitor.boldPositions)
+    return StyledString(
+        visitor.text,
+        visitor.boldPositions,
+        visitor.italicPositions,
+        visitor.underlinePositions,
+    )
 }
