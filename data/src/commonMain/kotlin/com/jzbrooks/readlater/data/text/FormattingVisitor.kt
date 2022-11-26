@@ -31,7 +31,7 @@ internal class FormattingVisitor {
                 "h4",
                 "h5",
                 "tr",
-            )
+            ) && !builder.endsWith('\n')
         ) append("\n")
     }
 
@@ -47,7 +47,7 @@ internal class FormattingVisitor {
                 "h3",
                 "h4",
                 "h5",
-            )
+            ) && !builder.endsWith('\n')
         ) append("\n")
         else if (name == "strong" || name == "b") {
             val range = boldStart!! until builder.length

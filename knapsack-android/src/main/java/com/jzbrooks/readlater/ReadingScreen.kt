@@ -13,7 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
@@ -38,7 +40,15 @@ fun ReadingScreen(backStackEntry: NavBackStackEntry, repository: EntryRepository
             builder.append(styledString.text)
 
             for (bold in styledString.boldPositions) {
-                builder.addStyle(SpanStyle(fontWeight = FontWeight.Bold), bold.first, bold.last)
+                builder.addStyle(SpanStyle(fontWeight = FontWeight.Bold), bold.first, bold.last + 1)
+            }
+
+            for (italic in styledString.italicPositions) {
+                builder.addStyle(SpanStyle(fontStyle = FontStyle.Italic), italic.first, italic.last + 1)
+            }
+
+            for (underline in styledString.underlinedPositions) {
+                builder.addStyle(SpanStyle(textDecoration = TextDecoration.Underline), underline.first, underline.last + 1)
             }
 
             formattedContent.value = builder.toAnnotatedString()
