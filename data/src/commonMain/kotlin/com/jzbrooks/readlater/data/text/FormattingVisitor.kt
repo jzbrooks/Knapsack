@@ -6,18 +6,19 @@ internal class FormattingVisitor {
         get() = builder.toString()
 
     private var boldStart: Int? = null
-    val boldPositions = mutableListOf<IntRange>()
+    val boldPositions = MutableList(1024) { IntRange.EMPTY }
 
     private var italicStart: Int? = null
-    val italicPositions = mutableListOf<IntRange>()
+    val italicPositions = MutableList(1024) { IntRange.EMPTY }
 
     private var underlineStart: Int? = null
-    val underlinePositions = mutableListOf<IntRange>()
+    val underlinePositions = MutableList(1024) { IntRange.EMPTY }
 
     fun head(element: HtmlElement) {
         val name = element.tagName
+        val text = element.text
 
-        if (element.text != null) append(element.text!!)
+        if (text != null) append(text)
         else if (name == "strong" || name == "b") boldStart = builder.length
         else if (name == "em" || name == "i") italicStart = builder.length
         else if (name == "u") underlineStart = builder.length
@@ -67,7 +68,7 @@ internal class FormattingVisitor {
 
     private fun append(text: String) {
         if (text == " " &&
-            (builder.isEmpty() || builder.substring(builder.length - 1) in setOf(" ", "\n"))
+            (builder.isEmpty() || builder.last() in setOf(' ', '\n'))
         ) return  // don't accumulate long runs of empty spaces
 
         builder.append(text)
