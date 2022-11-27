@@ -30,6 +30,7 @@ jobs:
 
       - name: Install pods
         run: pod install
+        working-directory: ./knapsack-ios
 
       - name: Run tests
         run: xcodebuild test -scheme readlater -project readlater.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.0' | xcpretty && exit ${PIPESTATUS[0]}
