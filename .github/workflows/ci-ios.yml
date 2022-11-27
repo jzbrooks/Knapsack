@@ -28,8 +28,8 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
 
-      - name: Build data
-        run: ./gradlew :data:linkPodDebugFrameworkIos
+      - name: Build common
+        run: ./gradlew :common:linkPodDebugFrameworkIos
 
       - name: Install pods
         run: pod install

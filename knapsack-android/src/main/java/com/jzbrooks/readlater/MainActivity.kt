@@ -14,11 +14,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.jzbrooks.readlater.data.CachingEntryRepository
-import com.jzbrooks.readlater.data.SettingsManager
-import com.jzbrooks.readlater.data.db.DriverFactory
-import com.jzbrooks.readlater.data.net.auth.Authenticator
-import com.jzbrooks.readlater.data.net.entries.EntryService
+import com.jzbrooks.readlater.common.CachingEntryRepository
+import com.jzbrooks.readlater.common.SettingsManager
+import com.jzbrooks.readlater.common.db.DriverFactory
+import com.jzbrooks.readlater.common.net.auth.Authenticator
+import com.jzbrooks.readlater.common.net.entries.EntryService
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
 
 

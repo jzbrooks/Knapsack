@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jzbrooks.readlater.data.AppSettingsManager
-import com.jzbrooks.readlater.data.SettingsManager
-import com.jzbrooks.readlater.data.net.auth.AuthenticationManager
-import com.jzbrooks.readlater.data.net.auth.PasswordGrantRequestDto
+import com.jzbrooks.readlater.common.AppSettingsManager
+import com.jzbrooks.readlater.common.SettingsManager
+import com.jzbrooks.readlater.common.net.auth.AuthenticationManager
+import com.jzbrooks.readlater.common.net.auth.PasswordGrantRequestDto
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
 import kotlinx.coroutines.launch
 

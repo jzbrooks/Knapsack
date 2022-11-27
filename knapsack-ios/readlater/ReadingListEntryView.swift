@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import data
+import common
 
 struct ReadingListEntryView: View {
     @State var entry: Entry
@@ -16,7 +16,7 @@ struct ReadingListEntryView: View {
         let styled = string.toStyledString()
         return styled.renderToView()
     }
-    
+
     var body: some View {
         ScrollView(.vertical) {
             formattedText.padding(.horizontal)

@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
-import data
+import common
 
 @main
 struct ReadlaterApp: App {
     @StateObject var appSettingsManager: SettingsManager
     @StateObject var authenticationManager: Authenticator
     @StateObject var dataController: CachingEntryRepository
-    
+
     init() {
         let driverFactory = DriverFactory()
         let appSettings = SettingsManager()
@@ -24,7 +24,7 @@ struct ReadlaterApp: App {
         _authenticationManager = StateObject(wrappedValue: authenticator)
         _appSettingsManager = StateObject(wrappedValue: appSettings)
     }
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationView {

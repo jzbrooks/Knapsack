@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jzbrooks.readlater.data.AppSettingsManager
+import com.jzbrooks.readlater.common.AppSettingsManager
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
 
 @Composable

@@ -1,23 +1,23 @@
 PODS:
-  - data (1.0):
+  - common (1.0):
     - HTMLReader
   - HTMLReader (2.2.1)
 
 DEPENDENCIES:
-  - data (from `../data`)
+  - common (from `../common`)
 
 SPEC REPOS:
   trunk:
     - HTMLReader
 
 EXTERNAL SOURCES:
-  data:
-    :path: "../data"
+  common:
+    :path: "../common"
 
 SPEC CHECKSUMS:
-  data: 1bc1fc352420a54f8995a2a4a0e7780a000396ce
+  common: a346b3de8cfb26ea1e3a55108e03391828c3c156
   HTMLReader: 1839a8505df3fb7a833e767759a799ce8e210de1
 
-PODFILE CHECKSUM: 60b1ee87532773f940c7f580bf19ceffb6e5a3be
+PODFILE CHECKSUM: 420d3aaf4b98bafb0a8dd8e70c3b00325c73f2fa
 
 COCOAPODS: 1.11.3

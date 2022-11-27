@@ -1,10 +1,10 @@
 import SwiftUI
-import data
+import common
 
 struct AuthenticationView: View {
     @EnvironmentObject var appSettingsManager: SettingsManager
     @EnvironmentObject var authenticationManager: Authenticator
-    
+
     @State var baseUrl: String = "https://app.wallabag.it"
     @State var clientId: String = ""
     @State var clientSecret: String = ""
@@ -18,27 +18,27 @@ struct AuthenticationView: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .textFieldStyle(.roundedBorder)
-            
+
             TextField("Client ID", text: $clientId)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .textFieldStyle(.roundedBorder)
-            
+
             TextField("Client Secret", text: $clientSecret)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .textFieldStyle(.roundedBorder)
-            
+
             TextField("Username", text: $username)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .textFieldStyle(.roundedBorder)
-            
+
             SecureField("Password", text: $password)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .textFieldStyle(.roundedBorder)
-            
+
             withAnimation {
                 Button(action: {
                     Task {
@@ -54,9 +54,9 @@ struct AuthenticationView: View {
                 })
             }
         }.padding()
-        
+
     }
-    
+
     private func getAccessToken() async throws {
         appSettingsManager.baseUrl = self.baseUrl
 
