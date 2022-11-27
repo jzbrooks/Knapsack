@@ -28,10 +28,13 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_14.0.1.app && /usr/bin/xcodebuild -version
 
+      - name: Build data
+        run: ./gradlew :data:linkPodDebugFrameworkIos
+
       - name: Install pods
         run: pod install
         working-directory: ./knapsack-ios
 
       - name: Run tests
-        run: xcodebuild test -scheme readlater -project readlater.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.0' | xcpretty && exit ${PIPESTATUS[0]}
+        run: xcodebuild test -scheme readlater -workspace readlater.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=16.0' | xcpretty && exit ${PIPESTATUS[0]}
         working-directory: ./knapsack-ios
