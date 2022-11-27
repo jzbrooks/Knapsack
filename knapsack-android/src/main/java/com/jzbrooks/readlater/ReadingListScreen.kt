@@ -19,8 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.jzbrooks.readlater.data.Entry
-import com.jzbrooks.readlater.data.EntryRepository
+import com.jzbrooks.readlater.common.Entry
+import com.jzbrooks.readlater.common.EntryRepository
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
 
 @Composable
@@ -43,7 +43,7 @@ fun ReadingList(
     val entries = repository.entries.collectAsState(initial = emptyList())
 
     LazyColumn {
-        items(entries.value, key = Entry::id) {
+        items(entries.value, key = com.jzbrooks.readlater.common.Entry::id) {
             ReadingListEntry(it, Modifier.padding(8.dp).clickable { onEntryClicked(it) })
             Divider()
         }

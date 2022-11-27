@@ -19,9 +19,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
-import com.jzbrooks.readlater.data.EntryRepository
-import com.jzbrooks.readlater.data.text.HtmlString
-import com.jzbrooks.readlater.data.text.toStyledString
+import com.jzbrooks.readlater.common.EntryRepository
+import com.jzbrooks.readlater.common.text.HtmlString
+import com.jzbrooks.readlater.common.text.toStyledString
 
 @Composable
 fun ReadingScreen(backStackEntry: NavBackStackEntry, repository: EntryRepository) {

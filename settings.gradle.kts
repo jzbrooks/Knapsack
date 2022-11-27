@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Knapsack"
-include(":data")
+include(":common")
 include(":knapsack-android")
