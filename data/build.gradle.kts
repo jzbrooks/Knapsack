@@ -1,8 +1,8 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("org.jetbrains.kotlin.native.cocoapods")
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
@@ -10,16 +10,26 @@ plugins {
 kotlin {
     android()
 
-    val xcf = XCFramework()
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach {
-        it.binaries.framework {
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
+        else -> ::iosX64
+    }
+
+    iosTarget("ios") {}
+
+    cocoapods {
+        version = "1.0"
+        summary = "Wallabag data management library"
+        homepage = "https://github.com/jzbrooks/knapsack"
+        ios.deploymentTarget = "16"
+        osx.deploymentTarget = "13.0"
+        framework {
+            isStatic = false
             baseName = "data"
-            xcf.add(this)
         }
+
+        pod("HTMLReader")
     }
 
     sourceSets {
@@ -49,33 +59,23 @@ kotlin {
             dependencies {
                 implementation("com.squareup.sqldelight:android-driver:1.5.3")
                 implementation("io.ktor:ktor-client-android:2.1.2")
+                implementation("org.jsoup:jsoup:1.15.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
             }
         }
 
         val androidTest by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
 
+        val iosMain by getting {
+            dependsOn(commonMain)
             dependencies {
                 implementation("com.squareup.sqldelight:native-driver:1.5.3")
                 implementation("io.ktor:ktor-client-ios:2.1.2")
             }
         }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
+
+        val iosTest by getting {
             dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 }
@@ -86,6 +86,10 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
+    }
+
+    lint {
+        informational += setOf("GradleDependency")
     }
 }
 
