@@ -26,3 +26,6 @@ It is a typical gradle build. If you'd like to build only the common library, yo
 `knapsack-android/` - a Jetpack Compose-based Android wallabag client
 
 `knapsack-web/` - tbd
+
+## Notes
+Notes on points of friction can be found in [notes.md](notes.md).
