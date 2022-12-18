@@ -1,9 +1,15 @@
 package com.jzbrooks.readlater
 
 import android.webkit.URLUtil
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -21,46 +27,58 @@ fun HostConfiguration(
     onClientIdChanged: (String) -> Unit,
     clientSecret: String,
     onClientSecretChanged: (String) -> Unit,
+    onCloseClicked: () -> Unit,
 ) {
     val baseUrl = rememberSaveable { mutableStateOf(appSettings.baseUrl) }
 
-    Box(
-        Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-            TextField(
-                baseUrl.value,
-                {
-                    baseUrl.value = it
-                    if (URLUtil.isValidUrl(it)) {
-                        appSettings.baseUrl = it
-                    }
-                },
-                label = { Text("Base Url") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-            )
+    Column(Modifier.fillMaxWidth()) {
+        Column(
+            horizontalAlignment = Alignment.End,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            IconButton(onClick = onCloseClicked) {
+                Icon(Icons.Default.Close, "Close")
+            }
+        }
 
-            Spacer(Modifier.size(8.dp))
+        Box(
+            Modifier.fillMaxSize(),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                TextField(
+                    baseUrl.value,
+                    {
+                        baseUrl.value = it
+                        if (URLUtil.isValidUrl(it)) {
+                            appSettings.baseUrl = it
+                        }
+                    },
+                    label = { Text("Base Url") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
 
-            TextField(
-                clientId,
-                onClientIdChanged,
-                label = { Text("Client ID") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-            )
+                Spacer(Modifier.size(8.dp))
 
-            Spacer(Modifier.size(8.dp))
+                TextField(
+                    clientId,
+                    onClientIdChanged,
+                    label = { Text("Client ID") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
 
-            TextField(
-                clientSecret,
-                onClientSecretChanged,
-                label = { Text("Client Secret") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-            )
+                Spacer(Modifier.size(8.dp))
+
+                TextField(
+                    clientSecret,
+                    onClientSecretChanged,
+                    label = { Text("Client Secret") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
         }
     }
 }
@@ -79,6 +97,7 @@ fun HostConfigurationPreview() {
             onClientIdChanged = { },
             clientSecret = "lkjfnin2fnalskgf8h94g",
             onClientSecretChanged = { },
+            onCloseClicked = { },
         )
     }
 }
