@@ -36,7 +36,7 @@ fun AuthScreen(
 
     val bottomSheet = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
-        skipHalfExpanded = true,
+        skipHalfExpanded = false,
     )
 
     ModalBottomSheetLayout(
@@ -47,8 +47,10 @@ fun AuthScreen(
                 { clientId.value = it },
                 clientSecret.value,
                 { clientSecret.value = it },
+                { coroutineScope.launch { bottomSheet.hide() } }
             )
         },
+        sheetBackgroundColor = MaterialTheme.colors.secondary,
         sheetState = bottomSheet,
     ) {
         Column(Modifier.background(MaterialTheme.colors.secondary)) {
