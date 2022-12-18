@@ -3,7 +3,13 @@ package com.jzbrooks.readlater
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
@@ -53,8 +59,8 @@ fun ReadingList(
 @Composable
 fun ReadingListEntry(entry: Entry, modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier.fillMaxWidth().fillMaxHeight(2/16f),
-        verticalAlignment = Alignment.CenterVertically
+        modifier = modifier.fillMaxWidth().fillMaxHeight(2 / 16f),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(Modifier.size(48.dp), contentAlignment = Alignment.Center) {
             if (entry.preview_picture != null) {
@@ -62,12 +68,12 @@ fun ReadingListEntry(entry: Entry, modifier: Modifier = Modifier) {
                     model = entry.preview_picture!!.replace("http://", "https://"),
                     contentDescription = null,
                     onError = { Log.e("coil", "Image failed ${it.result.throwable}") },
-                    contentScale = ContentScale.FillHeight
+                    contentScale = ContentScale.FillHeight,
                 )
             } else {
                 Image(
                     painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         }
@@ -86,10 +92,10 @@ fun ReadingListEntryPreview() {
             Entry(
                 1,
                 "You should read this",
-                "https://americanreformer.org/wp-content/uploads/2022/10/mai-rodriguez-__4mdndKK1w-unsplash-1-scaled-e1664893436482-1536x476.jpeg",
+                "https://example.com/image.jpeg",
                 "<h1>dude</h1>",
-                null
-            )
+                null,
+            ),
         )
     }
 }

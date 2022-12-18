@@ -1,6 +1,5 @@
 package com.jzbrooks.readlater.common
 
-import com.jzbrooks.readlater.common.Entry
 import com.jzbrooks.readlater.common.db.Database
 import com.jzbrooks.readlater.common.db.DriverFactory
 import com.jzbrooks.readlater.common.net.auth.AuthenticationManager
@@ -19,7 +18,7 @@ class CachingEntryRepository(
     constructor(
         authenticationManager: AuthenticationManager,
         databaseDriver: DriverFactory,
-        service: EntryService
+        service: EntryService,
     ) : this(
         authenticationManager,
         Database(databaseDriver.createDriver()),

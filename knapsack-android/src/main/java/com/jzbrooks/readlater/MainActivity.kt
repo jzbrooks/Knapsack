@@ -21,7 +21,6 @@ import com.jzbrooks.readlater.common.net.auth.Authenticator
 import com.jzbrooks.readlater.common.net.entries.EntryService
 import com.jzbrooks.readlater.ui.theme.ReadlaterTheme
 
-
 class MainActivity : ComponentActivity() {
     private val driverFactory = DriverFactory(this)
     private val appSettings = SettingsManager()
@@ -41,13 +40,13 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(it),
-                        color = MaterialTheme.colors.background
+                        color = MaterialTheme.colors.background,
                     ) {
                         val startDestination =
                             if (authenticator.isAuthenticated) Routes.HOME else Routes.AUTH
                         NavHost(
                             navController = navController,
-                            startDestination = startDestination
+                            startDestination = startDestination,
                         ) {
                             composable(Routes.AUTH) {
                                 AuthScreen(appSettings, authenticator) {
@@ -56,12 +55,14 @@ class MainActivity : ComponentActivity() {
                             }
                             composable(Routes.HOME) {
                                 ReadingListScreen(repository) { entry ->
-                                    navController.navigate(Routes.READING.replace("{id}", entry.id.toString()))
+                                    navController.navigate(
+                                        Routes.READING.replace("{id}", entry.id.toString()),
+                                    )
                                 }
                             }
                             composable(
                                 Routes.READING,
-                                arguments = listOf(navArgument("id") { type = NavType.LongType })
+                                arguments = listOf(navArgument("id") { type = NavType.LongType }),
                             ) { backStackEntry -> ReadingScreen(backStackEntry, repository) }
                         }
                     }

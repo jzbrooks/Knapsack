@@ -1,6 +1,5 @@
 package com.jzbrooks.readlater
 
-import android.graphics.Typeface
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -44,11 +43,19 @@ fun ReadingScreen(backStackEntry: NavBackStackEntry, repository: EntryRepository
             }
 
             for (italic in styledString.italicPositions) {
-                builder.addStyle(SpanStyle(fontStyle = FontStyle.Italic), italic.first, italic.last + 1)
+                builder.addStyle(
+                    SpanStyle(fontStyle = FontStyle.Italic),
+                    italic.first,
+                    italic.last + 1,
+                )
             }
 
             for (underline in styledString.underlinedPositions) {
-                builder.addStyle(SpanStyle(textDecoration = TextDecoration.Underline), underline.first, underline.last + 1)
+                builder.addStyle(
+                    SpanStyle(textDecoration = TextDecoration.Underline),
+                    underline.first,
+                    underline.last + 1,
+                )
             }
 
             formattedContent.value = builder.toAnnotatedString()
@@ -82,6 +89,6 @@ private fun EntryTextPreview() {
             Better, though difficult, the right way to go,
             Than wrong, though easy, where the end is woe.
             """.trimIndent(),
-        )
+        ),
     )
 }
