@@ -9,7 +9,7 @@ actual class DriverFactory(private val context: Context) {
         return AndroidSqliteDriver(
             Database.Schema,
             context,
-            "readlater.db"
+            "readlater.db",
         )
     }
 }

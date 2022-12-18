@@ -1,10 +1,23 @@
 package com.jzbrooks.readlater
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,7 +60,7 @@ fun AuthScreen(
                 { clientId.value = it },
                 clientSecret.value,
                 { clientSecret.value = it },
-                { coroutineScope.launch { bottomSheet.hide() } }
+                { coroutineScope.launch { bottomSheet.hide() } },
             )
         },
         sheetBackgroundColor = MaterialTheme.colors.secondary,
@@ -60,7 +73,7 @@ fun AuthScreen(
 
             Box(
                 Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Column {
                     TextField(
@@ -88,7 +101,7 @@ fun AuthScreen(
                                 clientId.value,
                                 clientSecret.value,
                                 username.value,
-                                password.value
+                                password.value,
                             )
 
                             coroutineScope.launch {
@@ -120,7 +133,7 @@ fun AuthScreenPreview() {
                 override suspend fun retrieveAccessToken(): String = ""
                 override suspend fun authenticate(password: PasswordGrantRequestDto) { }
                 override fun deleteCredentials() { }
-            }
+            },
         ) { }
     }
 }

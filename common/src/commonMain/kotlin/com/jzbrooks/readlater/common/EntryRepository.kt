@@ -1,6 +1,5 @@
 package com.jzbrooks.readlater.common
 
-import com.jzbrooks.readlater.common.Entry
 import kotlinx.coroutines.flow.Flow
 
 interface EntryRepository {

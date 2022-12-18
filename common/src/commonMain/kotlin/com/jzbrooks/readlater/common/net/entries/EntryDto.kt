@@ -9,5 +9,5 @@ data class EntryDto(
     val title: String,
     val url: String,
     val content: String,
-    @SerialName("preview_picture") val previewPicture: String? = null
+    @SerialName("preview_picture") val previewPicture: String? = null,
 )

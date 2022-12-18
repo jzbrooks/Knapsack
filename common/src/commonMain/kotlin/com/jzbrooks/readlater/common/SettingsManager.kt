@@ -1,10 +1,11 @@
 package com.jzbrooks.readlater.common
 
 import com.russhwolf.settings.Settings
-import io.ktor.http.*
+import io.ktor.http.URLParserException
+import io.ktor.http.Url
 
 class SettingsManager(private val settings: Settings) : AppSettingsManager {
-    constructor(): this(Settings())
+    constructor() : this(Settings())
 
     override var baseUrl: String
         get() = settings.getString(AppSettings.Keys.BASE_URL, AppSettings.Defaults.BASE_URL)

@@ -28,7 +28,7 @@ class Authenticator(
 
     private var accessToken: String?
         get() = settings.getStringOrNull(Keys.ACCESS_TOKEN)
-        set(value) { settings[Keys.ACCESS_TOKEN] = value}
+        set(value) { settings[Keys.ACCESS_TOKEN] = value }
 
     private var refreshToken: String?
         get() = settings.getStringOrNull(Keys.REFRESH_TOKEN)

@@ -1,6 +1,11 @@
 package com.jzbrooks.readlater.common.text
 
-import cocoapods.HTMLReader.*
+import cocoapods.HTMLReader.HTMLComment
+import cocoapods.HTMLReader.HTMLDocument
+import cocoapods.HTMLReader.HTMLDocumentType
+import cocoapods.HTMLReader.HTMLElement
+import cocoapods.HTMLReader.HTMLNode
+import cocoapods.HTMLReader.HTMLTextNode
 
 /** Represents a single element in a static document tree. */
 internal actual class HtmlElement(private val node: HTMLNode) {

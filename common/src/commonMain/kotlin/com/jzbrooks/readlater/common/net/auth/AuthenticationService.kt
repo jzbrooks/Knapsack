@@ -1,13 +1,18 @@
 package com.jzbrooks.readlater.common.net.auth
 
 import com.jzbrooks.readlater.common.AppSettings
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.URLBuilder
+import io.ktor.http.appendPathSegments
+import io.ktor.http.contentType
+import io.ktor.http.isSuccess
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -15,10 +20,12 @@ import kotlinx.serialization.json.Json
 class AuthenticationService(private val appSettings: AppSettings) : AuthService {
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
-            json(Json {
-                ignoreUnknownKeys = true
-                encodeDefaults = true
-            })
+            json(
+                Json {
+                    ignoreUnknownKeys = true
+                    encodeDefaults = true
+                },
+            )
         }
     }
 
@@ -30,7 +37,7 @@ class AuthenticationService(private val appSettings: AppSettings) : AuthService 
         return authenticate<RefreshGrantRequestDto>(requestDto)
     }
 
-    private suspend inline fun <reified T> authenticate(requestDto: T) : GrantResponseDto {
+    private suspend inline fun <reified T> authenticate(requestDto: T): GrantResponseDto {
         return withContext(Dispatchers.Default) {
             val url = URLBuilder(appSettings.baseUrl)
                 .appendPathSegments("oauth", "v2", "token")
