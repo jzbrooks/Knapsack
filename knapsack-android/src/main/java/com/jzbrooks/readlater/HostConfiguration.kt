@@ -1,5 +1,6 @@
 package com.jzbrooks.readlater
 
+import android.R
 import android.webkit.URLUtil
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jzbrooks.readlater.common.AppSettingsManager
@@ -31,54 +33,57 @@ fun HostConfiguration(
 ) {
     val baseUrl = rememberSaveable { mutableStateOf(appSettings.baseUrl) }
 
-    Column(Modifier.fillMaxWidth()) {
-        Column(
-            horizontalAlignment = Alignment.End,
-            modifier = Modifier.fillMaxWidth(),
+    Column(Modifier.padding(top = 8.dp).fillMaxSize()) {
+        Row(
+            Modifier.fillMaxWidth(),
+            Arrangement.SpaceBetween,
         ) {
+            Text(
+                "Host Configuration",
+                style = MaterialTheme.typography.h2,
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(horizontal = 16.dp),
+            )
+
             IconButton(onClick = onCloseClicked) {
                 Icon(Icons.Default.Close, "Close")
             }
         }
 
-        Box(
-            Modifier.fillMaxSize(),
-            contentAlignment = Alignment.TopCenter
-        ) {
-            Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                TextField(
-                    baseUrl.value,
-                    {
-                        baseUrl.value = it
-                        if (URLUtil.isValidUrl(it)) {
-                            appSettings.baseUrl = it
-                        }
-                    },
-                    label = { Text("Base Url") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                )
+        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+            TextField(
+                baseUrl.value,
+                {
+                    baseUrl.value = it
+                    if (URLUtil.isValidUrl(it)) {
+                        appSettings.baseUrl = it
+                    }
+                },
+                label = { Text("Base Url") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
 
-                Spacer(Modifier.size(8.dp))
+            Spacer(Modifier.size(8.dp))
 
-                TextField(
-                    clientId,
-                    onClientIdChanged,
-                    label = { Text("Client ID") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                )
+            TextField(
+                clientId,
+                onClientIdChanged,
+                label = { Text("Client ID") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
 
-                Spacer(Modifier.size(8.dp))
+            Spacer(Modifier.size(8.dp))
 
-                TextField(
-                    clientSecret,
-                    onClientSecretChanged,
-                    label = { Text("Client Secret") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
+            TextField(
+                clientSecret,
+                onClientSecretChanged,
+                label = { Text("Client Secret") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
     }
 }
