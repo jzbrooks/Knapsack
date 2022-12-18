@@ -54,7 +54,7 @@ class Authenticator(
         refreshToken = grant.refreshToken
 
         // It might be more precise to look for a header with a start time in it?
-        expiration = Clock.System.now().plus(grant.expiresIn.seconds)
+        expiration = Clock.System.now() + grant.expiresIn.seconds
     }
 
     override fun deleteCredentials() {
@@ -72,7 +72,7 @@ class Authenticator(
         refreshToken = grant.refreshToken
 
         // It might be more precise to look for a header with a start time in it?
-        expiration = Clock.System.now().plus(grant.expiresIn.seconds)
+        expiration = Clock.System.now() + grant.expiresIn.seconds
     }
 
     private object Keys {
