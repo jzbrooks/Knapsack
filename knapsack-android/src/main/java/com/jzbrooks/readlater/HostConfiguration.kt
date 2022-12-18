@@ -28,7 +28,7 @@ fun HostConfiguration(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Column {
+        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
             TextField(
                 baseUrl.value,
                 {
@@ -39,6 +39,7 @@ fun HostConfiguration(
                 },
                 label = { Text("Base Url") },
                 singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
             )
 
             Spacer(Modifier.size(8.dp))
@@ -48,6 +49,7 @@ fun HostConfiguration(
                 onClientIdChanged,
                 label = { Text("Client ID") },
                 singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
             )
 
             Spacer(Modifier.size(8.dp))
@@ -57,6 +59,7 @@ fun HostConfiguration(
                 onClientSecretChanged,
                 label = { Text("Client Secret") },
                 singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
             )
         }
     }
