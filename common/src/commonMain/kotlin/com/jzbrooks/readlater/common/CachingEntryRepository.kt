@@ -29,7 +29,7 @@ class CachingEntryRepository(
         get() = database.entryQueries.selectAll().asFlow().mapToList()
 
     @Suppress("unused") // Used for Swift
-    suspend fun entries(): List<Entry> = database.entryQueries.selectAll().executeAsList()
+    fun getEntries(): List<Entry> = database.entryQueries.selectAll().executeAsList()
 
     override suspend fun updateEntries() {
         val entries = service.getEntries()

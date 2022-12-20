@@ -10,6 +10,15 @@ plugins {
 kotlin {
     android()
 
+    js(IR) {
+        version = "1.0.0"
+        useCommonJs()
+        browser {
+            webpackTask {
+            }
+        }
+    }
+
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
         System.getenv("NATIVE_ARCH")?.startsWith("arm") == true -> ::iosSimulatorArm64
@@ -52,6 +61,18 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:2.1.2")
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+
             }
         }
 
