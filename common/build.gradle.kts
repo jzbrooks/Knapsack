@@ -11,12 +11,8 @@ kotlin {
     android()
 
     js(IR) {
-        version = "1.0.0"
-        useCommonJs()
-        browser {
-            webpackTask {
-            }
-        }
+        version = "0.0.1"
+        nodejs()
     }
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {

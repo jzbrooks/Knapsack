@@ -85,7 +85,7 @@
     tslib "^2.4.0"
 
 Knapsack@../build/js/:
-  version "1.0.0"
+  version "0.0.1"
 
 caniuse-lite@^1.0.30001406:
   version "1.0.30001439"
