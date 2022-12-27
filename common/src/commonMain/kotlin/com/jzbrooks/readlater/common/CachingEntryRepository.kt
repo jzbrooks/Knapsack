@@ -35,7 +35,7 @@ class CachingEntryRepository(
         val entries = service.getEntries()
         for (entry in entries) {
             database.entryQueries.insertEntry(
-                entry.id,
+                entry.id.toInt(),
                 entry.title,
                 entry.url,
                 entry.content,
@@ -44,7 +44,7 @@ class CachingEntryRepository(
         }
     }
 
-    override suspend fun getEntry(id: Long): Entry? {
+    override suspend fun getEntry(id: Int): Entry? {
         return database.entryQueries.getEntry(id).executeAsOneOrNull()
     }
 

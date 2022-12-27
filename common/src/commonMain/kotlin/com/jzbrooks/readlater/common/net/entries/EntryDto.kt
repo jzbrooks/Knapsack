@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class EntryDto(
-    val id: Long,
+    val id: Int,
     val title: String,
     val url: String,
     val content: String,

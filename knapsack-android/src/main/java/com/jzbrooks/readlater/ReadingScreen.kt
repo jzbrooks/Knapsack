@@ -24,7 +24,7 @@ import com.jzbrooks.readlater.common.text.toStyledString
 
 @Composable
 fun ReadingScreen(backStackEntry: NavBackStackEntry, repository: EntryRepository) {
-    val id = backStackEntry.arguments?.getLong("id")!!
+    val id = backStackEntry.arguments?.getInt("id")!!
     val formattedContent = remember { mutableStateOf(AnnotatedString("")) }
 
     LaunchedEffect(id) {

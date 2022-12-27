@@ -1,5 +1,6 @@
 CREATE TABLE entry (
-  id INTEGER AS Long NOT NULL PRIMARY KEY,
+  -- This should be a ULong probably, but @JSExport doesn't support it :/
+  id INTEGER AS Int NOT NULL PRIMARY KEY,
   title TEXT NOT NULL,
   url TEXT NOT NULL,
   content TEXT NOT NULL,
