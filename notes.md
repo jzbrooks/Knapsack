@@ -7,3 +7,5 @@
 5. iOS library dependencies in a multiplatform module only really work if the library is objective-c compatible. Some libraries like SwiftSoup are pure Swift with no intention of adding objective-c compatibility. This seems like a step backward. https://youtrack.jetbrains.com/issue/KT-49132/Support-importing-Swift-declarations-without-objc-to-Kotlin
 6. common module weirdness (like no vararg apis (like string formatting))
 7. You have to annotate every declaration you would like to see in the JS library artifact with `@JsExport`. https://youtrack.jetbrains.com/issue/KT-47200/KJS-IR-Define-exports-without-JsExport
+8. JsExport doesn't support a bunch of basic types (like unsigned integral types (and Long), common collection interfaces like List<T>, etc)
+9. JsExport doesn't support suspend functions, which are a natural API for kotlin (and could be mapped into promises). This is annoying for many popular libraries like ktor who themselves use suspend functions. There isn't a great way to call them in common code.

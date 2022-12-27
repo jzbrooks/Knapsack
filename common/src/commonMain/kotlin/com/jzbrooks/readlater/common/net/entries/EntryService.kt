@@ -48,7 +48,24 @@ class EntryService(
                 println("Request failure $response\n\t${response.bodyAsText()})")
             }
 
-            response.body<EntriesDto>().entries.items
+            response.body<EntriesDto>().entries.items.toList()
         }
+    }
+
+    fun getEntriesJs(): Array<EntryDto> {
+        val url = URLBuilder(appSettings.baseUrl)
+            .appendEncodedPathSegments("api", "entries.json")
+            .build()
+
+        val response = httpClient.get(url) {
+            header("Authorization", "Bearer ${authenticationManager.retrieveAccessToken()}")
+            contentType(ContentType("application", "json"))
+        }
+
+        if (response.status.isSuccess()) {
+            println("Request failure $response\n\t${response.bodyAsText()})")
+        }
+
+        response.body<EntriesDto>().entries.items.toList()
     }
 }
