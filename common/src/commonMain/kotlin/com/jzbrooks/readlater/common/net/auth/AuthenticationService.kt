@@ -29,15 +29,15 @@ class AuthenticationService(private val appSettings: AppSettings) : AuthService 
         }
     }
 
-    override suspend fun authenticate(requestDto: PasswordGrantRequestDto): GrantResponseDto {
+    override suspend fun authenticate(requestDto: PasswordGrantRequestDto): GrantResponseDto? {
         return authenticate<PasswordGrantRequestDto>(requestDto)
     }
 
-    override suspend fun authenticate(requestDto: RefreshGrantRequestDto): GrantResponseDto {
+    override suspend fun authenticate(requestDto: RefreshGrantRequestDto): GrantResponseDto? {
         return authenticate<RefreshGrantRequestDto>(requestDto)
     }
 
-    private suspend inline fun <reified T> authenticate(requestDto: T): GrantResponseDto {
+    private suspend inline fun <reified T> authenticate(requestDto: T): GrantResponseDto? {
         return withContext(Dispatchers.Default) {
             val url = URLBuilder(appSettings.baseUrl)
                 .appendPathSegments("oauth", "v2", "token")
@@ -50,6 +50,7 @@ class AuthenticationService(private val appSettings: AppSettings) : AuthService 
 
             if (!response.status.isSuccess()) {
                 println("Auth request failed with $response\n\t${response.bodyAsText()}")
+                return@withContext null
             }
 
             response.body()
