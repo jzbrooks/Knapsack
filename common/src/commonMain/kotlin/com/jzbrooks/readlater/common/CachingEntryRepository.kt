@@ -32,7 +32,7 @@ class CachingEntryRepository(
     suspend fun entries(): List<Entry> = database.entryQueries.selectAll().executeAsList()
 
     override suspend fun updateEntries() {
-        val entries = service.getEntries()
+        val entries = service.getEntries().getOrDefault(emptyList())
         for (entry in entries) {
             database.entryQueries.insertEntry(
                 entry.id,

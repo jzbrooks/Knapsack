@@ -14,6 +14,7 @@ import io.ktor.http.appendEncodedPathSegments
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -33,22 +34,28 @@ class EntryService(
         }
     }
 
-    suspend fun getEntries(): List<EntryDto> {
+    suspend fun getEntries(): Result<List<EntryDto>> {
         return withContext(Dispatchers.Default) {
             val url = URLBuilder(appSettings.baseUrl)
                 .appendEncodedPathSegments("api", "entries.json")
                 .build()
 
-            val response = httpClient.get(url) {
-                header("Authorization", "Bearer ${authenticationManager.retrieveAccessToken()}")
-                contentType(ContentType("application", "json"))
-            }
+            try {
+                val response = httpClient.get(url) {
+                    header("Authorization", "Bearer ${authenticationManager.retrieveAccessToken()}")
+                    contentType(ContentType("application", "json"))
+                }
 
-            if (response.status.isSuccess()) {
-                println("Request failure $response\n\t${response.bodyAsText()})")
+                if (response.status.isSuccess()) {
+                    Result.success(response.body<EntriesDto>().entries.items)
+                } else {
+                    Result.failure(
+                        IOException("Request failure $response (${response.bodyAsText()})"),
+                    )
+                }
+            } catch (e: IOException) {
+                Result.failure(e)
             }
-
-            response.body<EntriesDto>().entries.items
         }
     }
 }

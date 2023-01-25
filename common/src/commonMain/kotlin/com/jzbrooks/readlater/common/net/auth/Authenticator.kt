@@ -47,7 +47,8 @@ class Authenticator(
     }
 
     override suspend fun authenticate(password: PasswordGrantRequestDto) {
-        val grant = authService.authenticate(password) ?: return
+        val grant = authService.authenticate(password).getOrElse { return }
+
         clientId = password.clientId
         clientSecret = password.clientSecret
         accessToken = grant.accessToken
@@ -67,7 +68,7 @@ class Authenticator(
 
     private suspend fun refreshAccessToken() {
         val refresh = RefreshGrantRequestDto(clientId!!, clientSecret!!, refreshToken!!)
-        val grant = authService.authenticate(refresh) ?: return
+        val grant = authService.authenticate(refresh).getOrElse { return }
         accessToken = grant.accessToken
         refreshToken = grant.refreshToken
 

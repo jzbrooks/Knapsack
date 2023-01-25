@@ -13,6 +13,7 @@ import io.ktor.http.appendPathSegments
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -29,31 +30,44 @@ class AuthenticationService(private val appSettings: AppSettings) : AuthService 
         }
     }
 
-    override suspend fun authenticate(requestDto: PasswordGrantRequestDto): GrantResponseDto? {
+    override suspend fun authenticate(
+        requestDto: PasswordGrantRequestDto,
+    ): Result<GrantResponseDto> {
         return authenticate<PasswordGrantRequestDto>(requestDto)
     }
 
-    override suspend fun authenticate(requestDto: RefreshGrantRequestDto): GrantResponseDto? {
+    override suspend fun authenticate(
+        requestDto: RefreshGrantRequestDto,
+    ): Result<GrantResponseDto> {
         return authenticate<RefreshGrantRequestDto>(requestDto)
     }
 
-    private suspend inline fun <reified T> authenticate(requestDto: T): GrantResponseDto? {
+    private suspend inline fun <reified T> authenticate(
+        requestDto: T,
+    ): Result<GrantResponseDto> {
         return withContext(Dispatchers.Default) {
             val url = URLBuilder(appSettings.baseUrl)
                 .appendPathSegments("oauth", "v2", "token")
                 .build()
 
-            val response = httpClient.post(url) {
-                contentType(ContentType("application", "json"))
-                setBody(requestDto)
-            }
+            try {
+                val response = httpClient.post(url) {
+                    contentType(ContentType("application", "json"))
+                    setBody(requestDto)
+                }
 
-            if (!response.status.isSuccess()) {
-                println("Auth request failed with $response\n\t${response.bodyAsText()}")
-                return@withContext null
+                if (response.status.isSuccess()) {
+                    Result.success(response.body())
+                } else {
+                    Result.failure(
+                        IllegalStateException(
+                            "Auth request failed with $response (${response.bodyAsText()})",
+                        ),
+                    )
+                }
+            } catch (e: IOException) {
+                Result.failure(e)
             }
-
-            response.body()
         }
     }
 }
