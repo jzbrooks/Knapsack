@@ -40,10 +40,10 @@ kotlin {
                 // probably hide this?
                 api("com.russhwolf:multiplatform-settings-no-arg:1.0.0-RC")
 
-                implementation("io.ktor:ktor-client-core:2.1.2")
-                implementation("io.ktor:ktor-client-content-negotiation:2.1.2")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.2")
-                implementation("com.squareup.sqldelight:coroutines-extensions:1.5.3")
+                implementation("io.ktor:ktor-client-core:2.2.1")
+                implementation("io.ktor:ktor-client-content-negotiation:2.2.1")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
+                implementation("com.squareup.sqldelight:coroutines-extensions:1.5.5")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             }
@@ -57,7 +57,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:android-driver:1.5.3")
+                implementation("com.squareup.sqldelight:android-driver:1.5.5")
                 implementation("io.ktor:ktor-client-android:2.1.2")
                 implementation("org.jsoup:jsoup:1.15.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
@@ -69,7 +69,7 @@ kotlin {
         val iosMain by getting {
             dependsOn(commonMain)
             dependencies {
-                implementation("com.squareup.sqldelight:native-driver:1.5.3")
+                implementation("com.squareup.sqldelight:native-driver:1.5.5")
                 implementation("io.ktor:ktor-client-ios:2.1.2")
             }
         }

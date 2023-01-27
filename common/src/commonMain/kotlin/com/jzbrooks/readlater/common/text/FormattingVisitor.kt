@@ -6,13 +6,13 @@ internal class FormattingVisitor {
         get() = builder.toString()
 
     private var boldStart: Int? = null
-    val boldPositions = MutableList(1024) { IntRange.EMPTY }
+    val boldPositions = mutableListOf<IntRange>()
 
     private var italicStart: Int? = null
-    val italicPositions = MutableList(1024) { IntRange.EMPTY }
+    val italicPositions = mutableListOf<IntRange>()
 
     private var underlineStart: Int? = null
-    val underlinePositions = MutableList(1024) { IntRange.EMPTY }
+    val underlinePositions = mutableListOf<IntRange>()
 
     fun head(element: HtmlElement) {
         val name = element.tagName
@@ -32,46 +32,39 @@ internal class FormattingVisitor {
             append("  ")
         } else if (builder.isNotEmpty() && // Don't prepend an newline
             name in setOf(
-                    "p",
-                    "h1",
-                    "h2",
-                    "h3",
-                    "h4",
-                    "h5",
-                    "tr",
-                )
-        ) {
-            append("\n")
-        }
-    }
-
-    fun tail(element: HtmlElement) {
-        val name = element.tagName
-        if (name in setOf(
-                "br",
-                "dd",
-                "dt",
                 "p",
                 "h1",
                 "h2",
                 "h3",
                 "h4",
                 "h5",
+                "tr",
             )
         ) {
             append("\n")
-        } else if (name == "strong" || name == "b") {
-            val range = boldStart!! until builder.length
-            boldStart = null
-            boldPositions.add(range)
-        } else if (name == "em" || name == "i") {
-            val range = italicStart!! until builder.length
-            italicStart = null
-            italicPositions.add(range)
-        } else if (name == "u") {
-            val range = underlineStart!! until builder.length
-            underlineStart = null
-            underlinePositions.add(range)
+        }
+    }
+
+    fun tail(element: HtmlElement) {
+        when (element.tagName) {
+            "br", "dd", "dt", "p", "h1", "h2", "h3", "h4", "h5" -> {
+                append("\n")
+            }
+            "strong", "b" -> {
+                val range = boldStart!! until builder.length
+                boldStart = null
+                boldPositions.add(range)
+            }
+            "em", "i" -> {
+                val range = italicStart!! until builder.length
+                italicStart = null
+                italicPositions.add(range)
+            }
+            "u" -> {
+                val range = underlineStart!! until builder.length
+                underlineStart = null
+                underlinePositions.add(range)
+            }
         }
     }
 
