@@ -8,7 +8,7 @@ plugins {
 }
 
 kotlin {
-    android()
+    androidTarget()
 
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
@@ -33,6 +33,10 @@ kotlin {
     }
 
     sourceSets {
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
+
         val commonMain by getting {
             kotlin.srcDir("src/generated/kotlin")
 
@@ -88,6 +92,10 @@ android {
 
     lint {
         informational += setOf("GradleDependency")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 
