@@ -22,7 +22,7 @@ kotlin {
         version = "1.0"
         summary = "Wallabag common library"
         homepage = "https://github.com/jzbrooks/knapsack"
-        ios.deploymentTarget = "16"
+        ios.deploymentTarget = "17"
         osx.deploymentTarget = "13.0"
         framework {
             isStatic = false
@@ -63,8 +63,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
             }
         }
-
-        val androidTest by getting
 
         val iosMain by getting {
             dependsOn(commonMain)
