@@ -15,12 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
           java-version: 17
+          distribution: zulu
 
       - name: Run checks
         run: ./gradlew check
@@ -29,13 +30,13 @@ jobs:
         run: ls -R ./knapsack-android/build
 
       - name: Archive lint results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lint results
           path: knapsack-android/build/reports/lint-results-*.html
 
       - name: Archive test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test results
           path: knapsack-android/build/reports/tests/test
@@ -44,7 +45,7 @@ jobs:
         run: ./gradlew bundleRelease
 
       - name: Archive knapsack-android-release.aab
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: knapsack-android-release.aab
           path: knapsack-android/build/outputs/bundle/release/knapsack-android-release.aab
