@@ -8,15 +8,15 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Wallabag data management library'
     spec.vendored_frameworks      = 'build/cocoapods/framework/data.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '16'
+    spec.ios.deployment_target = '17'
     spec.osx.deployment_target = '13.0'
     spec.dependency 'HTMLReader'
-                
+
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':data',
         'PRODUCT_MODULE_NAME' => 'data',
     }
-                
+
     spec.script_phases = [
         {
             :name => 'Build data',
@@ -36,5 +36,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-                
+
 end
