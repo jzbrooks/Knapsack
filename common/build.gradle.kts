@@ -84,18 +84,24 @@ kotlin {
 
 android {
     namespace = "com.jzbrooks.readlater.common"
-    compileSdk = 33
+    compileSdk = 34
+
     defaultConfig {
         minSdk = 28
-        targetSdk = 33
     }
 
     lint {
         informational += setOf("GradleDependency")
+        targetSdk = 34
     }
 
     buildFeatures {
         buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
